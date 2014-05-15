@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="libs/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="libs/underscore.js"></script>
+<script type="text/javascript" src="libs/backbone.js"></script>
+
+</head>
+<body>
+
+	<div id="certificate"></div>
+
+	<script type="text/template" id="tpl-certificate">
+		<h1><%= name %></h1>
+		<p>DOB: <%= dob %>
+	</script>
+
+	<script type="text/javascript">
+		CertificateView = Backbone.View.extend({
+			template : _.template($('#tpl-certificate').html()),
+			initialize : function() {
+				this.render();
+			},
+
+			render : function() {
+				var templateArgs = {
+					name : "Guy Incognito",
+					dob : "March 2, 1967"
+				};
+				$(this.el).html(this.template(templateArgs));
+			}
+		});
+
+		var certificate_view = new CertificateView({
+			el : $('#certificate')
+		});
+		
+		var MyRouter = Backbone.Router.extend({
+			routes: {
+				"/certificates/:id": "getCertificate"
+			},
+			getCertificate: function(id){
+				new CertificateView({el: $("#certificate")})
+			}
+		});
+		
+		var router = new MyRouter;
+		
+		Backbone.History.start();
+		
+	</script>
+
+</body>
+</html>
