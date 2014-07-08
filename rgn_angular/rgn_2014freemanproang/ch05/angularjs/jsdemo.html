@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Example</title>
+	<script src="angular.js"></script>
+	<script type="text/javascript">
+		
+		
+		function myFunc(name, weather){
+			console.log("Hello " + name + ".");
+			console.log("It is " + weather + " today.");
+		};
+		myFunc("Adam", "sunny");
+		
+		function printMessage(unknownObject){
+			if(angular.isFunction(unknownObject)){
+				unknownObject();
+			}else{
+				console.log(unknownObject);
+			}
+		}
+		
+		var variable1 = function sayHello(){
+			console.log("Hello!");
+		};
+		
+		var variable2 = "Goodbye!";
+		
+		printMessage(variable1);
+		printMessage(variable2);
+		
+		//creating objects
+		console.log("====================> creating objects");
+		var myData = new Object();
+		myData.name = "Adam";
+		myData.weather = "sunny";
+	
+		myFunc(myData.name, myData.weather);
+		
+		//object literals
+		console.log("====================> object literals");
+		var myData2 = {
+			name : "Adam",
+			weather : "sunny"
+		};
+	
+		myFunc(myData2.name, myData2.weather);
+		
+		//functions as methods 
+		console.log("====================> functions as methods");
+		var myData3 = {
+			name : "Adam",
+			weather : "sunny",
+			printMessages: function(){
+				console.log("Hello " + this.name + ".");
+				console.log("It is " + this.weather + " today.");
+			}
+		};
+	
+		myData3.printMessages();
+		
+		
+		//extending objects
+		console.log("====================> extending objects");
+		var myData4 = {
+			name : "Adam",
+			weather : "sunny",
+			printMessages: function(){
+				console.log("Hello " + this.name + ".");
+				console.log("It is " + this.weather + " today.");
+			}
+		};
+		
+		var myExtendedObject = {
+				city: "London"	
+		};
+		
+		angular.extend(myExtendedObject, myData4);
+		console.log(myExtendedObject.name);
+		console.log(myExtendedObject.city);
+		
+	</script>
+</head>
+<body>
+	This is a simple example
+</body>
+</html>
